@@ -3,5 +3,6 @@ steps:
   entrypoint: npm
   dir: ''
   args : ['run','deploy']
+  
 - name: 'gcr.io/cloud-builders/gcloud'  
   args: ['-q','app','deploy']
