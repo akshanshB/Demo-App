@@ -5,6 +5,6 @@ steps:
   args : ['run','deploy']
 
 - name: 'gcr.io/cloud-builders/gcloud'  
-  args: ['app','deploy']
-  # args: ['-q','app','deploy']
+  args: ['-q','app','deploy']
+  # args: ['app','deploy']
   # args: ['-q','app','deploy']
