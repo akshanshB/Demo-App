@@ -6,11 +6,11 @@ steps:
 
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['-q','app','deploy']
-  timeout : 1800s 
-
+  timeout : 1800s
   # - name: 'gcr.io/cloud-builders/gcloud'
   #   args: ['run', 'deploy', 'cicd-demo', '--image', 'gcr.io/$PROJECT_ID/angular-flask-demo', '--region', 'us-central1', '--platform', 'managed', '--port', '8000', '--allow-unauthenticated']
 
+## new template
 # steps:
 #   - name: node:lts-alpine3.15
 #     entrypoint: npm
