@@ -5,7 +5,9 @@ steps:
     args : ['run','deploy']
 
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['-q','app','deploy']
+    args: ['-q','app','deploy', '--prod']
+    # args: ['-q','app','deploy']
+
 timeout : 1800s
   # - name: 'gcr.io/cloud-builders/gcloud'
   #   args: ['run', 'deploy', 'cicd-demo', '--image', 'gcr.io/$PROJECT_ID/angular-flask-demo', '--region', 'us-central1', '--platform', 'managed', '--port', '8000', '--allow-unauthenticated']
