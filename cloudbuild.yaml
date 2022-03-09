@@ -1,18 +1,18 @@
-steps:
-  - name: node
-    entrypoint: npm
-    dir: ''
-    args : ['run','deploy']
+# steps:
+#   - name: node
+#     entrypoint: npm
+#     dir: ''
+#     args : ['run','deploy']
 
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['-q','app','deploy']
-    # args: ['-q','app','deploy', '--prod']
+#   - name: 'gcr.io/cloud-builders/gcloud'
+#     args: ['-q','app','deploy']
+#     # args: ['-q','app','deploy', '--prod']
+#   - name: 'gcr.io/cloud-builders/gcloud'
+#     args: ['run', 'deploy', 'cicd-demo', '--image', 'gcr.io/$PROJECT_ID/angular-flask-demo', '--region', 'us-central1', '--platform', 'managed', '--port', '8000', '--allow-unauthenticated']
 
-timeout : 1800s
-  # - name: 'gcr.io/cloud-builders/gcloud'
-  #   args: ['run', 'deploy', 'cicd-demo', '--image', 'gcr.io/$PROJECT_ID/angular-flask-demo', '--region', 'us-central1', '--platform', 'managed', '--port', '8000', '--allow-unauthenticated']
+# timeout : 1800s
 
-## new template
+## new template 1
 # steps:
 #   - name: node:lts-alpine3.15
 #     entrypoint: npm
@@ -28,3 +28,38 @@ timeout : 1800s
 
 #   - name: 'gcr.io/cloud-builders/gcloud'
 #     args: ['run', 'deploy', 'todoapp', '--image', 'gcr.io/$PROJECT_ID/angularapp', '--region', 'us-central1', '--platform', 'managed', '--port', '8000', '--allow-unauthenticated']
+
+## new template 2
+
+steps:
+  - name: node
+    entrypoint: npm
+    dir: "cicd-demo/"
+    args: ["run", "deploy"]
+
+ - name: "gcr.io/cloud-builders/gcloud"
+   args: ["-q", "app", "deploy"]
+
+# Build the container image
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/training-2022-342610/example-1", "."]
+  # Push the container image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/training-2022-342610/example-1"]
+  # Deploy container image to Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      [
+        "run",
+       "deploy",
+        "service-2",
+        "--image",
+        "gcr.io/training-2022-342610/example-1",
+        "--region",
+        "us-central1",
+        "--platform","managed",'--port',"8000","--allow-unauthenticated"
+      ]
+images:
+  - gcr.io/training-2022-342610/example-1
+timeout: 1800s  
