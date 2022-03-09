@@ -5,7 +5,7 @@ steps:
   args : ['run','deploy']
 
 - name: 'gcr.io/cloud-builders/gcloud'
-  timeout : 1800  
+  timeout : '1800' 
   args: ['-q','app','deploy']
 
   # - name: 'gcr.io/cloud-builders/gcloud'
