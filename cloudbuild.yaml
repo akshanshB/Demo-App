@@ -37,8 +37,8 @@ steps:
     dir: "cicd-demo/"
     args: ["run", "deploy"]
 
- - name: "gcr.io/cloud-builders/gcloud"
-   args: ["-q", "app", "deploy"]
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["-q", "app", "deploy"]
 
 # Build the container image
   - name: "gcr.io/cloud-builders/docker"
